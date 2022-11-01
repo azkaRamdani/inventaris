@@ -8,16 +8,26 @@
         <div class="col-lg-12">
         <div class="card mb-4 mt-2">
             <div class="card-header">
-                <h6>Data Kategori</h6>
+                <h6>Data Peminjaman</h6>
             </div>
             <div class="card-body">
-            <form action="/category/store" method="post">
+            <form action="/loans/store" method="post">
                 @csrf
-                <label for="inputName">Nama Kategori</label>
-                <input type="text" class="form-control mb-2" name="name" placeholder="Nama Kategori" required>
+                <label for="inputOfficer">Nama Petugas</label>
+                <input type="text" class="form-control mb-2" name="name" placeholder="Nama Petugas" required>
                 <div class="float-right mt-2">
-                <button type="submit" class="btn btn-outline-primary">Simpan</button>
-                </div>
+            </div>
+            <div>
+                <label for="inputLoans">Nama Peminjam</label>
+                <input type="text" class="form-control mb-2" name="name" placeholder="Nama Peminjam" required>
+            <div class="float-right mt-2">
+            </div>
+            <div>
+                <label for="inputGoods">Nama Barang</label>
+                <input type="text" class="form-control mb-2" name="name" placeholder="Nama Barang" required>
+            <div class="float-right mt-2">
+            <button type="submit" class="btn btn-outline-primary">Simpan</button>
+            </div>
             </form>
             </div>  
         </div>

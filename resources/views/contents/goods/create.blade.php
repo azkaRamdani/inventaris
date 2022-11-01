@@ -13,24 +13,22 @@
             <div class="card-body">
             <form action="/goods/store" method="post">
                 @csrf
+                
                 <label for="inputName">Nama</label>
                 <input type="text" class="form-control mb-2" name="name" placeholder="Nama Barang" required>
-                <label for="inputCondition">Kondisi</label>
+                
+                <label for="inputCategory">Kategori</label>
                 <div class="form-group">
-                    <select name="kondisiBarang" id="" class="form-control">
-                        <option>Kondisi Barang</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
+                    <select class="form-control @error('origin_field') is-invalid
+                    @enderror" name="origin_field" required>
+                        <option value="" selected disabled>Kategori</option>
+                        <option value="#">Alat Kebersihan</option>
+                        <option value="#">Kendaraan</option>
+                        <option value="#">Elektronik</option>
+                        <option value="#">Interior Ruangan</option>
                     </select>
                 </div>
-                <label for="inputStatus">Status</label>
-                <select name="statusBarang" id="" class="form-control">
-                    <option>Status Barang</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                </select>
+                
                 <div class="float-right mt-2">
                 <button type="submit" class="btn btn-outline-primary">Simpan</button>
                 </div>

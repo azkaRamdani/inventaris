@@ -12,12 +12,15 @@
             </div>
             <div class="card-body">
             <form action="/category/store" method="post">
+                
                 @csrf
                 <label for="inputName">Nama Kategori</label>
                 <input type="text" class="form-control mb-2" name="name" placeholder="Nama Kategori" required>
+                
                 <div class="float-right mt-2">
                 <button type="submit" class="btn btn-outline-primary">Simpan</button>
                 </div>
+
             </form>
             </div>  
         </div>

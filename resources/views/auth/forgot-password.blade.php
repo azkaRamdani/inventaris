@@ -23,7 +23,7 @@
                                             id="exampleInputEmail" aria-describedby="emailHelp"
                                             placeholder="Alamat Email...">
                                     </div>
-                                    <a href="/reset" class="btn btn-primary btn-block">
+                                    <a href="/reset-password" class="btn btn-primary btn-block">
                                         Atur Ulang
                                     </a>
                                 </form>

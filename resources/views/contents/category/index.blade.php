@@ -58,7 +58,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th>No</th>
-                                <th>Nama</th>
+                                <th>Nama Kategori</th>
                                 <th>Jumlah Barang</th>
                                 <th class="px-5">Aksi</th>
                             </tr>

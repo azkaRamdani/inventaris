@@ -22,9 +22,9 @@ class GoodsController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required',
-            'condition' => 'required',
-            'status' => 'required'
+            'name'     => 'required',
+            'category' => 'required',
+
         ]);
 
         Goods::create($validatedData);
@@ -34,8 +34,8 @@ class GoodsController extends Controller
 
     public function edit($id)
     {
-        $title = 'Ubah Barang';
-        $categories = Goods::where('id', $id)->get();
+        $title = 'Ubah Data Barang';
+        $goods = Goods::where('id', $id)->get();
         return view('contents.goods.edit', compact('title', 'goods'));
     }
 
@@ -51,6 +51,6 @@ class GoodsController extends Controller
     public function delete($id)
     {
         Goods::where('id', $id)->delete();
-        return redirect('/goods')->with('success', 'Barang berhasil dihapus');
+        return redirect('/goods')->with('success', 'Kategori berhasil dihapus');
     }
 }

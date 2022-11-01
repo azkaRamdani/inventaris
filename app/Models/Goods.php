@@ -36,7 +36,7 @@ class Goods extends Model
             'id',
             'name',
             'condition',
-            'status',
+            'status'
         ]);
 
         return $goods;

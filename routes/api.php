@@ -39,6 +39,7 @@ Route::group([
         Route::get('/goods', [DatatableController::class, 'getGoods']);
     });
 });
+
 Route::group([
     'namespace' => 'API',
 ], function(){
@@ -46,5 +47,35 @@ Route::group([
         'prefix' => 'datatables',
     ], function(){
         Route::get('/loans', [DatatableController::class, 'getLoans']);
+    });
+});
+
+Route::group([
+    'namespace' => 'API',
+], function(){
+    Route::group([
+        'prefix' => 'datatables',
+    ], function(){
+        Route::get('/reports', [DataTableController::class, 'getReports']);
+    });
+});
+
+Route::group([
+    'namespace' => 'API',
+], function(){
+    Route::group([
+        'prefix' => 'datatables',
+    ], function(){
+        Route::get('/report/damaged', [DataTableController::class, 'getReportDamaged']);
+    });
+});
+
+Route::group([
+    'namespace' => 'API',
+], function(){
+    Route::group([
+        'prefix' => 'datatables',
+    ], function(){
+        Route::get('/report/lost', [DataTableController::class, 'getReportLost']);
     });
 });

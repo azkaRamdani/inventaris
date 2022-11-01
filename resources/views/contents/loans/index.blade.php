@@ -29,7 +29,7 @@
             @endif
             <div class="card mb-4 dt-container">
                 <div class="col-lg-12 mt-3">
-                    <a href="/members/create" class="btn btn-sm btn-outline-primary rounded mb-2"><i
+                    <a href="/loans/create" class="btn btn-sm btn-outline-primary rounded mb-2"><i
                             class="fa-solid fa-plus"></i> Tambah</a>
                     <div class="float-right ml-2">
                         <div class="input-group input-group-sm">
@@ -59,6 +59,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Petugas</th>
+                                <th>Peminjam</th>
                                 <th>Barang</th>
                                 <th>Tanggal Pinjam</th>
                                 <th>Status</th>

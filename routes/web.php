@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GoodsController;
 use App\Http\Controllers\LoansController;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
@@ -11,24 +12,76 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Route Middleware Guest
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
 |
 */
 
-// Route::get('/', function () {
-//     return view('layouts.auth');
-// });
+Route::get('/', function () {
+    return redirect('/login');
+});
 
-Route::get('/', [AuthController::class, 'login']);
-Route::get('/login', [AuthController::class, 'login']);
-Route::get('/register', [AuthController::class, 'register']);
-Route::get('/forgot-password', [AuthController::class, 'forgotPassword']);
-Route::get('/reset', [AuthController::class, 'reset']);
+Route::group([
+    'namespace'  => 'App',
+    'middleware' => ['guest'],
+], function()
+{
+    Route::prefix('login')->group(function()
+    {
+        Route::get('/', [AuthController::class, 'index'])->name('login');
+        Route::post('/', [AuthController::class, 'authenticate']);
+    });
+    
+    Route::prefix('register')->group(function()
+    {
+        Route::get('/', [AuthController::class, 'register']);
+        Route::post('/', [AuthController::class, 'store']);
+    });
+    
+    Route::prefix('activation')->group(function()
+    {
+        Route::get('/{token}', [AuthController::class, 'activation']);
+        Route::post('/{token}', [AuthController::class, 'activate']);
+    });
+
+    Route::prefix('forgot-password')->group(function()
+    {
+        Route::get('/', [AuthController::class, 'forgotPassword']);
+        Route::post('/', [AuthController::class, 'mailReset']);
+    });
+
+    Route::prefix('reset-password')->group(function()
+    {
+        Route::get('/{token}', [AuthController::class, 'resetPassword']);
+        Route::post('/{token}', [AuthController::class, 'mailReset']);
+    });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Route Middleware Auth
+|--------------------------------------------------------------------------
+|
+*/
+Route::group([
+    'namespace'     =>  'APP',
+    'middleware'    =>  ['auth']
+], function(){
+    
+    Route::get('/logout', [AuthController::class, 'logout']);
+    
+    
+});
+
+
+Route::prefix('account')->group(function()
+{
+    Route::get('/', [AccountController::class, 'index']);    
+    Route::post('/', [AccountController::class, 'update']);    
+    Route::get('/password', [AccountController::class, 'password']);    
+    Route::post('/{id}/password', [AccountController::class, 'updatePassword']);    
+});
+
 Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::group(
@@ -52,7 +105,7 @@ Route::group(
             Route::post('/store', [GoodsController::class, 'store']);
             Route::get('/{id}', [GoodsController::class, 'index']);
             Route::get('/{id}/edit', [GoodsController::class, 'edit']);
-            Route::get('/{id}/update', [GoodsController::class, 'update']);
+            Route::post('/{id}/update', [GoodsController::class, 'update']);
             Route::get('/{id}/delete', [GoodsController::class, 'delete']);
         });
         
@@ -60,17 +113,20 @@ Route::group(
         Route::prefix('loans')->group(function(){
             Route::get('/', [LoansController::class, 'index']);
             Route::get('/create', [LoansController::class, 'create']);
-            Route::get('/store', [LoansController::class, 'store']);
+            Route::post('/store', [LoansController::class, 'store']);
             Route::get('/{id}', [LoansController::class, 'index']);
             Route::get('/{id}/edit', [LoansController::class, 'edit']);
-            Route::get('/{id}/update', [LoansController::class, 'update']);
+            Route::post('/{id}/update', [LoansController::class, 'update']);
             Route::get('/{id}/delete', [LoansController::class, 'delete']);
         });
 
         Route::prefix('reports')->group(function(){
             Route::get('/', [ReportsController::class, 'index']);
+            Route::get('/create', [ReportsController::class, 'create']);
+            Route::post('/store', [ReportsController::class, 'store']);
             Route::get('/{id}', [ReportsController::class, 'index']);
-            Route::get('/{id}/edit', [ReportsController::class, 'index']);
-            Route::get('/{id}/delete', [ReportsController::class, 'index']);
+            Route::get('/{id}/edit', [ReportsController::class, 'edit']);
+            Route::post('/{id}/update', [ReportsController::class, 'update']);
+            Route::get('/{id}/delete', [ReportsController::class, 'delete']);
         });
 });

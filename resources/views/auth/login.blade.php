@@ -17,15 +17,21 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Masuk !</h1>
                                 </div>
-                                <form class="user">
+                                <form action="/login" action="post">
+                                    @csrf
                                     <div class="form-group">
-                                        <input type="email" class="form-control"
-                                            id="exampleInputEmail" aria-describedby="emailHelp"
-                                            placeholder="Alamat Email...">
+                                        <input type="email" class="form-control" @error('email') is-invalid
+                                        @enderror id="Email" aria-describedby="emailHelp"
+                                            placeholder="Alamat Email" autofocus required value="{{ old ('email') }}">
+                                        @error('email')
+                                            <div class="invalid-feedback">
+                                                {{ $message  }} 
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <input type="password" class="form-control"
-                                            id="exampleInputPassword" placeholder="Kata Sandi">
+                                            id="Password" placeholder="Kata Sandi" required>
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">

@@ -10,6 +10,7 @@
             <div class="card-header">
                 <h6>Data Kategori</h6>
             </div>
+            
             <div class="card-body">
                 @foreach ($categories as $category)
                     
@@ -17,10 +18,12 @@
                     @csrf
                     <label for="inputName">Nama Kategori</label>
                     <input value="{{ $category->name }}" type="text" class="form-control mb-2" name="name" placeholder="Nama Kategori" required>
+                    
                     <div class="float-right mt-2">
                         <button type="submit" class="btn btn-outline-primary">Simpan</button>
                     </div>
                 </form>
+                
                 @endforeach
             </div>  
         </div>

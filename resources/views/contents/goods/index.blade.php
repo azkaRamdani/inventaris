@@ -19,9 +19,9 @@
 
     <div class="row">
         <div class="col-lg-12">
-            @if (session('Berhasil'))
+            @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('Berhasil') }}
+                {{ session('success') }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -29,7 +29,21 @@
             @endif
             <div class="card mb-4 dt-container">
                 <div class="col-lg-12 mt-3">
-                    <a href="/goods/create" class="btn btn-sm btn-outline-primary rounded mb-2"><i
+                    <div class="btn-group dropright">
+                        <button type="button" class="btn btn-sm btn-outline-secondary rounded"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa-solid fa-download"></i>
+                        </button>
+                        <div class="dropdown-menu w-100 text-center">
+                            <button class="btn btn-sm btn-success col w-75 mb-2 dt-excel"><i class="fa-solid fa-file-excel"></i>
+                                Excel</button>
+                            <button class="btn btn-sm btn-danger col w-75 mb-2 dt-pdf"><i class="fa-solid fa-file-pdf"></i>
+                                PDF</button>
+                            <button class="btn btn-sm btn-secondary col w-75 mb-2 dt-print"><i class="fa-solid fa-print"></i>
+                                Print</button>
+                        </div>
+                    </div>
+                    <a href="/goods/create" class="btn btn-sm btn-outline-primary rounded"><i
                             class="fa-solid fa-plus"></i> Tambah</a>
                     <div class="float-right ml-2">
                         <div class="input-group input-group-sm">

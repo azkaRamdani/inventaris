@@ -5,52 +5,48 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Loans extends Model
+class BorrowGoods extends Model
 {
     use HasFactory;
-    
-    public function Officer()
-    {
-        return $this->belongsTo(User::class, 'officer_id');
-    }
-    
+
+    protected $guarded = ['id'];
+
     public function Goods()
     {
         return $this->belongsTo(Goods::class);
     }
 
-    public function borrower()
+    public function Returner()
     {
-        return $this->belongsTo(Borrower::class, 'borrower_id');
+        return $this->belongsTo(Borrower::class, 'returner_id');
     }
-    
-    public function Loans()
+
+    public function Borrow()
     {
-        return $this->belongsTo(Loans::class);
+        return $this->belongsTo(Borrow::class);
     }
-    
-        public static function getLoans()
-        {
-            $loans = Loans::select([
-                'id',
-                'officer_id',
-                'borrower_id',
-                'goods_id',
-                'loans_date',
-                'return_date',
-                'status'
-            ]);
-            return $loans;
-        }
-    
+
+    public static function getBorrows($request)
+    {
+        $borrows = BorrowGoods::select([
+            'id',
+            'borrow_id',
+            'goods_id',
+            'status_borrow',
+        ])->latest();
+
+        return $borrows;
+    }
+
     public static function getReportBorrows($request)
     {
-        $borrows = Loans::select([
+        $borrows = BorrowGoods::select([
             'id',
             'goods_id',
             'borrow_id',
+            'estimated_return',
             'created_at',
-        ])->where('status_loans', 1);
+        ])->where('status_borrow', 1);
 
         if(isset($request['startDate'])){
             $borrows->whereBetween('created_at', [$request['startDate'], $request['endDate']]);
@@ -61,9 +57,9 @@ class Loans extends Model
 
     public static function getReportDamaged($request)
     {
-        $borrows = Loans::select([
+        $borrows = BorrowGoods::select([
             'id',
-            'book_id',
+            'goods_id',
             'borrow_id',
             'return_date',
         ])->where('return_condition', 2);
@@ -77,7 +73,7 @@ class Loans extends Model
 
     public static function getReportLost($request)
     {
-        $borrows = Loans::select([
+        $borrows = BorrowGoods::select([
             'id',
             'goods_id',
             'borrow_id',

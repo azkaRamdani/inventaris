@@ -16,6 +16,7 @@ class LoansSeeder extends Seeder
     {
         Loans::create([
             'officer_id'    =>  1,
+            'borrower_name' => 'kamil',
             'goods_id'      =>  1,
             'loans_date'    =>  '2022-10-18',
             'return_date'   =>  '2022-10-21',
@@ -24,6 +25,7 @@ class LoansSeeder extends Seeder
 
         Loans::create([
             'officer_id'    =>  1,
+            'borrower_name' => 'kamil',
             'goods_id'      =>  3,
             'loans_date'    =>  '2022-10-18',
             'return_date'   =>  '2022-10-21',
@@ -32,6 +34,7 @@ class LoansSeeder extends Seeder
 
         Loans::create([
             'officer_id'    =>  1,
+            'borrower_name' => 'kamil',
             'goods_id'      =>  3,
             'loans_date'    =>  '2022-10-18',
             'return_date'   =>  '2022-10-21',

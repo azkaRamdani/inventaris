@@ -17,20 +17,44 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Registrasi !</h1>
                                 </div>
-                                <form class="user">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control"
-                                            id="exampleInputEmail" aria-describedby="emailHelp"
-                                            placeholder="Nama Lengkap">
+                                <div class="form-group">
+                                    <input type="number" class="form-control @error('identifier_number') is-invalid
+                                        @enderror" name="identifier_number" placeholder="NIP" required>
+                                        @error('identifier_number')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control @error('name') is-invalid
+                                    @enderror" name="name" placeholder="Nama" required>
+                                    @error('name')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
                                     </div>
-                                    <div class="form-group">
-                                        <input type="email" class="form-control"
-                                            id="exampleInputEmail" aria-describedby="emailHelp"
-                                            placeholder="Alamat Email...">
+                                @enderror
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option value="" selected disabled>Jenis Kelamin</option>
+                                        <option value="1">Laki - Laki</option>
+                                        <option value="2">Perempuan</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control @error('email') is-invalid
+                                    @enderror" name="email" placeholder="Email" required>
+                                    @error('email')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
                                     </div>
+                                @enderror
+                                </div>
                                     <div class="form-group">
-                                        <select name="asalBidang" id="" class="form-control">
-                                            <option>Asal Bidang</option>
+                                        <select class="form-control @error('origin_field') is-invalid    
+                                        @enderror" name="asal bidang" required>
+                                            <option value="" selected disabled>Asal Bidang</option>
                                             <option>Tibum</option>
                                             <option>Linmas</option>
                                             <option>GakPerunda</option>
@@ -38,8 +62,8 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control"
-                                            id="exampleInputPassword" placeholder="Kata Sandi">
+                                        <input type="password" class="form-control @error('password') is-invalid
+                                        @enderror" name="kata sandi" placeholder="Kata Sandi">
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
@@ -48,9 +72,13 @@
                                                 Me</label>
                                         </div>
                                     </div>
-                                    <a href="/login" class="btn btn-primary btn-block">
-                                        Registrasi
-                                    </a>
+                                    <form class="user" action="/register" method="POST">
+                                        @method('post')
+                                        @csrf
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary btn-block">Registrasi</button>
+                                        </div>
+                                    </form>
                                 </form>
                                 <hr>
                                 <div class="text-center">
